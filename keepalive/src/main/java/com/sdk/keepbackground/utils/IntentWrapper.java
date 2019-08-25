@@ -206,6 +206,10 @@ public class IntentWrapper {
      */
     @NonNull
     public static List<IntentWrapper> whiteListMatters(final Activity a, String reason) {
+        if(SpManager.getInstance().getBoolean(SpManager.Keys.SP_IS_ACTION_WHITE_POWER)){
+            return null;
+        }
+        SpManager.getInstance().putBoolean(SpManager.Keys.SP_IS_ACTION_WHITE_POWER,true);
         List<IntentWrapper> showed = new ArrayList<>();
         if (reason == null) reason = "核心服务的持续运行";
         List<IntentWrapper> intentWrapperList = getIntentWrapperList(a);

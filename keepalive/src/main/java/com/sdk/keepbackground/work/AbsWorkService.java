@@ -12,7 +12,6 @@ import android.util.Log;
 
 
 import com.sdk.keepbackground.watch.AbsServiceConnection;
-import com.sdk.keepbackground.utils.DaemonEnv;
 import com.sdk.keepbackground.utils.ForegroundNotificationUtils;
 import com.sdk.keepbackground.singlepixel.ScreenReceiverUtil;
 import com.sdk.keepbackground.watch.WatchDogService;

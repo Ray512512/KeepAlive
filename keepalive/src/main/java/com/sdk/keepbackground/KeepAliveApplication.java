@@ -14,8 +14,8 @@ import java.util.List;
  * Date    : 2019/8/13
  * Modifier:
  */
-public class MyApplication extends Application {
-    private static MyApplication instance;
+public class KeepAliveApplication extends Application {
+    private static KeepAliveApplication instance;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,7 +34,7 @@ public class MyApplication extends Application {
     }
 
     //创建一个静态的方法，以便获取context对象
-    public static MyApplication getInstance() {
+    public static KeepAliveApplication getInstance() {
         return instance;
     }
 

@@ -3,7 +3,7 @@ package com.sdk.keepbackground.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.sdk.keepbackground.MyApplication;
+import com.sdk.keepbackground.KeepAliveApplication;
 
 import java.util.Map;
 
@@ -27,7 +27,7 @@ public class SPUtils {
      * @param spName  spName
      */
     public SPUtils(String spName) {
-        sp = MyApplication.getInstance().getSharedPreferences(spName, Context.MODE_PRIVATE);
+        sp = KeepAliveApplication.getInstance().getSharedPreferences(spName, Context.MODE_PRIVATE);
         editor = sp.edit();
         editor.apply();
     }

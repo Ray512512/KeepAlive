@@ -176,11 +176,5 @@
     -keep class com.amap.api.navi.**{*;}
     -keep class com.autonavi.**{*;}
 
--keep class com.sdk.keepbackground.base.** { *; }
--keep class com.sdk.keepbackground.bean.** { *; }
-#-libraryjars libs/Coolfar_sdk.jar
-#-keep class com.vise.** { *; }
-#-keep class com.amap.** { *; }
+-keep class com.sdk.keepbackground.work.** { *; }
 
-
-#-libraryjars libs/baidumapapi.jar -keep class com.baidu.mapapi.* {*; }

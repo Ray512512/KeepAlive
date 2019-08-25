@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sdk.keepbackground.utils.DaemonEnv;
+import com.sdk.keepbackground.work.DaemonEnv;
 import com.sdk.keepbackground.utils.IntentWrapper;
 import com.sdk.keepbackground.utils.SpManager;
 import com.sdk.keepbackground.work.AbsWorkService;
@@ -19,10 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initLocaService() {
         //忽略电池优化
-        if(!SpManager.getInstance().getBoolean(SpManager.Keys.SP_IS_ACTION_WHITE_POWER)){
-            IntentWrapper.whiteListMatters(this, "轨迹跟踪服务的持续运行");
-            SpManager.getInstance().putBoolean(SpManager.Keys.SP_IS_ACTION_WHITE_POWER,true);
-        }
+        DaemonEnv.whiteListMatters(this, "轨迹跟踪服务的持续运行");
         //开启保护
         DaemonEnv.sendStartWorkBroadcast(MainActivity.this);
         //启动work服务

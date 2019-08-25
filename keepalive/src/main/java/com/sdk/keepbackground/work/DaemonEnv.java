@@ -1,4 +1,4 @@
-package com.sdk.keepbackground.utils;
+package com.sdk.keepbackground.work;
 
 import android.app.Activity;
 import android.app.Service;
@@ -8,6 +8,7 @@ import android.os.Build;
 import android.util.Log;
 
 
+import com.sdk.keepbackground.utils.IntentWrapper;
 import com.sdk.keepbackground.watch.AbsServiceConnection;
 
 import io.reactivex.annotations.NonNull;
@@ -105,6 +106,10 @@ public final class DaemonEnv {
         Log.d("sj_keep", "发送停止广播。。。。");
         // 以广播的形式通知所有进程终止
         context.sendBroadcast(new Intent(ACTION_CANCEL_JOB_ALARM_SUB));
+    }
+
+    public static void whiteListMatters(final Activity a, String reason){
+        IntentWrapper.whiteListMatters(a, reason);
     }
 
 }

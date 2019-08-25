@@ -26,7 +26,6 @@ android {
             // 移除无用的resource文件
 //            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 //可根据自己需求更改-+.693  gradlew againMakeJar
