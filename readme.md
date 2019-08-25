@@ -38,7 +38,7 @@ DaemonEnv.startServiceSafelyWithData(MainActivity.this,XXXService.class);
 
 
 
-###### 注：若需要更改代码，重新生成keepalive-release.aar 方式 Terminal下 gradlew againMakeJar 即可生成到keepalive/mylib
+###### 注：若需要更改代码，重新生成keepalive.aar ，方式： Terminal下执行gradlew againMakeJar 即可生成到keepalive/mylib
 
  
 
