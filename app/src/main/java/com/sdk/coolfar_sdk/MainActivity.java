@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initLocaService() {
-        //忽略电池优化
+        //初始化
+        DaemonEnv.init(this);
+        //請求用戶忽略电池优化
         DaemonEnv.whiteListMatters(this, "轨迹跟踪服务的持续运行");
-        //开启保护
-        DaemonEnv.sendStartWorkBroadcast(MainActivity.this);
         //启动work服务
         DaemonEnv.startServiceSafelyWithData(MainActivity.this,AbsWorkService.class);
     }

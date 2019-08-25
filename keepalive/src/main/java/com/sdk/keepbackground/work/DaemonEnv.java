@@ -1,6 +1,7 @@
 package com.sdk.keepbackground.work;
 
 import android.app.Activity;
+import android.app.Application;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +34,12 @@ public final class DaemonEnv {
     public static final int DEFAULT_WAKE_UP_INTERVAL = 2 * 60 * 1000; // 默认JobScheduler 唤醒时间为 2 分钟
     public static final int MINIMAL_WAKE_UP_INTERVAL = 60 * 1000; // 最小时间为 1 分钟
 
+    public static Context app;
+    public static void init(Context context){
+        //开启保护
+        app=context.getApplicationContext();
+        DaemonEnv.sendStartWorkBroadcast(context);
+    }
     public static void startServiceMayBind(@NonNull final Context context,
                                     @NonNull final Class<? extends Service> serviceClass,
                                     @NonNull AbsServiceConnection connection) {

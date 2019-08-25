@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.sdk.keepbackground.KeepAliveApplication;
+import com.sdk.keepbackground.work.DaemonEnv;
 
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class SPUtils {
      * @param spName  spName
      */
     public SPUtils(String spName) {
-        sp = KeepAliveApplication.getInstance().getSharedPreferences(spName, Context.MODE_PRIVATE);
+        sp = DaemonEnv.app.getSharedPreferences(spName, Context.MODE_PRIVATE);
         editor = sp.edit();
         editor.apply();
     }

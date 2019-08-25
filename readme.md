@@ -14,21 +14,18 @@ dependencies中添加
   compile(name:'keepalive-release', ext:'aar')
 ~~~
 
-#### 2. manifest中配置application 
+#### 2. 在Application中初始化
 
 ~~~xml
-android:name="com.sdk.keepbackground.KeepAliveApplication"（或者继承KeepAliveApplication）
+  DaemonEnv.init(this);
 ~~~
 
 
 
-#### 3.activity中开启后台保活开关
+#### 3.activity中向用户申请开启后台保活开关（可选）
 
 ~~~java
 DaemonEnv.whiteListMatters(this, "保活服务的持续运行");
-
-DaemonEnv.sendStartWorkBroadcast(MainActivity.this);
-
 ~~~
 
 

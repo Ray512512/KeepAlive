@@ -3,6 +3,7 @@ package com.sdk.keepbackground.utils;
 import android.text.TextUtils;
 
 import com.sdk.keepbackground.KeepAliveApplication;
+import com.sdk.keepbackground.work.DaemonEnv;
 
 /**
  * <pre>
@@ -43,7 +44,7 @@ public class AppUtils {
      * @return
      */
     public static String getUUID() {
-        String uuid = AndroidUtil.getMacAddress(KeepAliveApplication.getInstance());
+        String uuid = AndroidUtil.getMacAddress(DaemonEnv.app);
         if(TextUtils.isEmpty(uuid) || "02:00:00:00:00:00".equals(uuid)) {
             uuid = AndroidUtil.getSerialNumber();
         }
