@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -28,13 +28,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    def SDK_NAME = "keepalive-1.0.0.aar"
 //可根据自己需求更改-+.693  gradlew againMakeJar
     task againMakeJar(type: Copy) {
         delete 'mylib/keeplive.aar' //删除之前的旧jar包
         from('build/outputs/aar/') //从这个目录下取出默认jar包
         into('mylib/') //将jar包输出到指定目录下
         include('keepalive-release.aar')
-        rename('keepalive-release.aar', 'keepalive.aar') //自定义jar包的名字
+        rename('keepalive-release.aar', SDK_NAME) //自定义jar包的名字
     }
     againMakeJar.dependsOn(build)
 }

@@ -49,8 +49,7 @@ public class WatchDogService extends Service {
     private void startBindWorkServices(){
         if (WatchProcessPrefHelper.mWorkServiceClass!=null && isCanStartWatchDog) {
             DaemonEnv.startServiceMayBind(WatchDogService.this, WatchProcessPrefHelper.mWorkServiceClass, mConnection);
-            DaemonEnv.startServiceSafely(WatchDogService.this,
-                    PlayMusicService.class);
+            DaemonEnv.startServiceSafely(WatchDogService.this, PlayMusicService.class);
         }
     }
 

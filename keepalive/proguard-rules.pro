@@ -176,5 +176,5 @@
     -keep class com.amap.api.navi.**{*;}
     -keep class com.autonavi.**{*;}
 
--keep class com.sdk.keepbackground.work.** { *; }
+-keep class com.sdk.keepbackground.** { *; }
 

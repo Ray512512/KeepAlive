@@ -2,12 +2,12 @@ package com.sdk.coolfar_sdk;
 
 import android.os.Bundle;
 
+
+import com.sdk.keepbackground.work.AbsWorkService;
+import com.sdk.keepbackground.work.DaemonEnv;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sdk.keepbackground.work.DaemonEnv;
-import com.sdk.keepbackground.utils.IntentWrapper;
-import com.sdk.keepbackground.utils.SpManager;
-import com.sdk.keepbackground.work.AbsWorkService;
 
 public class MainActivity extends AppCompatActivity {
     @Override
