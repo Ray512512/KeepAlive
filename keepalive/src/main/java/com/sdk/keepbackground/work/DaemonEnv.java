@@ -67,7 +67,7 @@ public final class DaemonEnv {
     }
 
 
-    public static void startServiceSafelyWithData(Activity context, Class<? extends Service> i){
+    public static void startServiceSafelyWithData(Context context, Class<? extends Service> i){
         try {
             if (Build.VERSION.SDK_INT >= 26){
                 context.startForegroundService(new Intent(context,i));
