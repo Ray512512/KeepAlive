@@ -1,3 +1,5 @@
+###### 关于原理可移步 https://www.jianshu.com/p/b5371df6d7cb 这篇博客总结的很到位。 
+
 #### 1.复制keepalive-1.0.0.aar 到app/libs ,app下build android中添加（keepalive-1.0.0.aar 在keepalive/mylib）
 
 ~~~java
