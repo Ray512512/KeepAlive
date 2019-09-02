@@ -16,7 +16,6 @@ import com.sdk.keepbackground.utils.ForegroundNotificationUtils;
 import com.sdk.keepbackground.singlepixel.ScreenReceiverUtil;
 import com.sdk.keepbackground.watch.WatchDogService;
 
-import io.reactivex.annotations.NonNull;
 
 
 /**
@@ -42,6 +41,7 @@ public abstract class AbsWorkService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        if(DaemonEnv.app==null)return;
         if (!needStartWorkService()) {
             stopSelf();
         }else {
@@ -82,7 +82,7 @@ public abstract class AbsWorkService extends Service {
     }
 
 
-    @NonNull
+
     @Override
     public IBinder onBind(Intent intent) {
         return onBindService(intent, null);
@@ -131,7 +131,7 @@ public abstract class AbsWorkService extends Service {
      */
     public abstract Boolean isWorkRunning();
 
-    @NonNull
+
     public abstract IBinder onBindService(Intent intent, Void alwaysNull);
     public abstract void onServiceKilled();
 

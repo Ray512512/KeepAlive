@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
@@ -34,5 +35,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 //    api project(':keepalive')
-    compile(name:'keepalive-1.0.0', ext:'aar')
+    compile(name:'keepalive-1.0.1', ext:'aar')
 }

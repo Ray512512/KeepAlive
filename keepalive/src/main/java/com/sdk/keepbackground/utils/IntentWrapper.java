@@ -17,8 +17,7 @@ import android.provider.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.annotations.NonNull;
+;
 
 
 public class IntentWrapper {
@@ -204,7 +203,7 @@ public class IntentWrapper {
      * 处理白名单.
      * @return 弹过框的 IntentWrapper.
      */
-    @NonNull
+
     public static List<IntentWrapper> whiteListMatters(final Activity a, String reason) {
         if(SpManager.getInstance().getBoolean(SpManager.Keys.SP_IS_ACTION_WHITE_POWER)){
             return null;

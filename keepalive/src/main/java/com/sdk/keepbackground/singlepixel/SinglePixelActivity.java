@@ -15,7 +15,6 @@ import android.view.WindowManager;
 
 import com.sdk.keepbackground.watch.WatchDogService;
 
-import io.reactivex.annotations.Nullable;
 
 
 /**
@@ -28,7 +27,7 @@ public class SinglePixelActivity extends Activity {
     private static final String TAG = SinglePixelActivity.class.getSimpleName();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Window mWindow = getWindow();
         mWindow.setGravity(Gravity.LEFT | Gravity.TOP);

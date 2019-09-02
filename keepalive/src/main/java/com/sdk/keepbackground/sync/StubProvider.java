@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
-import io.reactivex.annotations.Nullable;
 
 
 /**
@@ -18,19 +17,19 @@ public class StubProvider extends ContentProvider {
         return false;
     }
 
-    @Nullable
+
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         return null;
     }
 
-    @Nullable
+
     @Override
     public String getType(Uri uri) {
         return null;
     }
 
-    @Nullable
+
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         return null;

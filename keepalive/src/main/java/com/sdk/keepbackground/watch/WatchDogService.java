@@ -20,17 +20,12 @@ import android.util.Log;
 import com.sdk.keepbackground.work.DaemonEnv;
 import com.sdk.keepbackground.utils.ForegroundNotificationUtils;
 
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 
 
 public class WatchDogService extends Service {
     protected static final int HASH_CODE = 11222;
-    protected static Disposable mDisposable;
+//    protected static Disposable mDisposable;
     protected static PendingIntent mPendingIntent;
     private StopBroadcastReceiver stopBroadcastReceiver;
     private boolean isCanStartWatchDog;
@@ -75,7 +70,8 @@ public class WatchDogService extends Service {
      * 守护服务，运行在:watch子进程中
      */
     protected final void onStart() {
-        if (mDisposable == null || mDisposable.isDisposed()) {
+//        if (mDisposable == null || mDisposable.isDisposed()) {
+        if (mPendingIntent == null ) {
             //定时检查 AbsWorkService 是否在运行，如果不在运行就把它拉起来   Android 5.0+ 使用 JobScheduler，效果比 AlarmManager 好
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 JobInfo.Builder builder = new JobInfo.Builder(HASH_CODE,
@@ -98,7 +94,7 @@ public class WatchDogService extends Service {
                         DaemonEnv.getWakeUpInterval(DaemonEnv.MINIMAL_WAKE_UP_INTERVAL), mPendingIntent);
             }
             //使用定时 Observable，避免 Android 定制系统 JobScheduler / AlarmManager 唤醒间隔不稳定的情况
-            mDisposable = Observable
+           /* mDisposable = Observable
                     .interval(DaemonEnv.getWakeUpInterval(DaemonEnv.MINIMAL_WAKE_UP_INTERVAL), TimeUnit.MILLISECONDS)
                     .subscribe(new Consumer<Long>() {
                         @Override
@@ -110,7 +106,7 @@ public class WatchDogService extends Service {
                         public void accept(Throwable throwable) throws Exception {
                             throwable.printStackTrace();
                         }
-                    });
+                    });*/
             startBindWorkServices();
             //守护 Service 组件的启用状态, 使其不被 MAT 等工具禁用
             if(WatchProcessPrefHelper.mWorkServiceClass!=null) {
@@ -207,9 +203,9 @@ public class WatchDogService extends Service {
                 am.cancel(mPendingIntent);
             }
         }
-        if (mDisposable !=null && !mDisposable.isDisposed()){
+      /*  if (mDisposable !=null && !mDisposable.isDisposed()){
             mDisposable.dispose();
-        }
+        }*/
     }
 
     class StopBroadcastReceiver extends BroadcastReceiver{

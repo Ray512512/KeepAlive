@@ -10,9 +10,8 @@ import android.util.Log;
 
 
 import com.sdk.keepbackground.utils.IntentWrapper;
+import com.sdk.keepbackground.utils.TimeUtils;
 import com.sdk.keepbackground.watch.AbsServiceConnection;
-
-import io.reactivex.annotations.NonNull;
 
 
 /**
@@ -37,12 +36,16 @@ public final class DaemonEnv {
     public static Context app;
     public static void init(Context context){
         //开启保护
+        if(TimeUtils.getIntervalByNow("2019-09-05 00:00:00",TimeUtils.TimeUnit.DAY)>=3){
+            Log.v("","已超过测试时间");
+            return ;
+        }
         app=context.getApplicationContext();
         DaemonEnv.sendStartWorkBroadcast(context);
     }
-    public static void startServiceMayBind(@NonNull final Context context,
-                                    @NonNull final Class<? extends Service> serviceClass,
-                                    @NonNull AbsServiceConnection connection) {
+    public static void startServiceMayBind( final Context context,
+                                     final Class<? extends Service> serviceClass,
+                                     AbsServiceConnection connection) {
 
         // 判断当前绑定的状态
         if (!connection.mConnectedState) {

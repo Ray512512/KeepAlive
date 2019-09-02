@@ -29,7 +29,7 @@ android {
         }
     }
 
-    def SDK_NAME = "keepalive-1.0.0.aar"
+    def SDK_NAME = "keepalive-1.0.2.aar"
 //可根据自己需求更改-+.693  gradlew againMakeJar
     task againMakeJar(type: Copy) {
         delete 'mylib/keeplive.aar' //删除之前的旧jar包
@@ -45,6 +45,6 @@ ext.rxAndroidVersion = '2.0.1'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
-    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+//    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+//    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
 }
