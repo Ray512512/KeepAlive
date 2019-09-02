@@ -1,6 +1,4 @@
-###### 关于原理可移步 https://www.jianshu.com/p/b5371df6d7cb 这篇博客总结的很到位。 
-
-#### 1.复制keepalive-1.0.0.aar 到app/libs ,app下build android中添加（keepalive-1.0.0.aar 在keepalive/mylib）
+#### 1.复制keepalive-1.0.2.aar 到app/libs ,app下build android中添加（keepalive-1.0.2.aar 在keepalive/mylib）
 
 ~~~java
 repositories {
@@ -13,7 +11,7 @@ repositories {
 dependencies中添加
 
 ~~~java
-  compile(name:'keepalive', ext:'aar')
+  compile(name:'keepalive-1.0.2', ext:'aar')
 ~~~
 
 #### 2. 在Application中初始化
