@@ -1,4 +1,4 @@
-#### 1.复制keepalive-1.0.2.aar 到app/libs ,app下build android中添加（keepalive-1.0.2.aar 在keepalive/mylib）
+#### 1.复制keepalive.aar 到app/libs ,app下build android中添加（keepalive.aar 在keepalive/mylib）
 
 ~~~java
 repositories {
@@ -11,7 +11,7 @@ repositories {
 dependencies中添加
 
 ~~~java
-  compile(name:'keepalive-1.0.2', ext:'aar')
+  compile(name:'keepalive-x.x.x', ext:'aar')
 ~~~
 
 #### 2. 在Application中初始化
