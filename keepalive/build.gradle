@@ -2,6 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 group='shihoo.wang'
 
+//aar名字
+def SDK_NAME = "keepalive-1.0.5.aar"
+
+//去除多余类配置
+configurations.maybeCreate("exclude")
+artifacts.add("exclude", file(SDK_NAME))
+//先生成aar后再加上去除配置
+apply from: "${project.projectDir.absoluteFile}\\excludeAar.gradle"
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
@@ -29,12 +38,11 @@ android {
         }
     }
 
-    def SDK_NAME = "keepalive-1.0.4.aar"
 //可根据自己需求更改-+.693  gradlew againMakeJar
     task againMakeJar(type: Copy) {
         delete 'mylib/keeplive.aar' //删除之前的旧jar包
         from('build/outputs/aar/') //从这个目录下取出默认jar包
-        into('mylib/') //将jar包输出到指定目录下
+        into('/') //将jar包输出到指定目录下
         include('keepalive-release.aar')
         rename('keepalive-release.aar', SDK_NAME) //自定义jar包的名字
     }

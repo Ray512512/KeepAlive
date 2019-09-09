@@ -122,8 +122,14 @@ public abstract class AbsWorkService extends Service {
      */
     public abstract Boolean needStartWorkService();
 
+    /**
+     * 开启具体业务，实际调用与isWorkRunning方法返回值有关，当isWorkRunning返回false才会执行该方法
+     */
     public abstract void startWork();
 
+    /**
+     * 服务停止需要执行的操作
+     */
     public abstract void stopWork();
     /**
      * 任务是否正在运行? 由实现者处理
@@ -132,6 +138,12 @@ public abstract class AbsWorkService extends Service {
     public abstract Boolean isWorkRunning();
 
 
+    /**
+     * 绑定远程service 可根据实际业务情况是否绑定自定义binder或者直接返回默认binder
+     * @param intent
+     * @param alwaysNull
+     * @return
+     */
     public abstract IBinder onBindService(Intent intent, Void alwaysNull);
     public abstract void onServiceKilled();
 
