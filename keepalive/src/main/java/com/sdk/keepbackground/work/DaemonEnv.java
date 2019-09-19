@@ -1,17 +1,25 @@
 package com.sdk.keepbackground.work;
 
 import android.app.Activity;
-import android.app.Application;
+import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 
-import com.sdk.keepbackground.utils.IntentWrapper;
-import com.sdk.keepbackground.utils.TimeUtils;
+import com.sdk.keepbackground.utils.JumpWindowPemiManagement;
+import com.sdk.keepbackground.utils.NotificationSetUtil;
+import com.sdk.keepbackground.utils.SPUtils;
+import com.sdk.keepbackground.utils.SpManager;
 import com.sdk.keepbackground.watch.AbsServiceConnection;
+
+import static com.sdk.keepbackground.work.IntentWrapper.getApplicationName;
 
 
 /**
@@ -114,8 +122,86 @@ public final class DaemonEnv {
         context.sendBroadcast(new Intent(ACTION_CANCEL_JOB_ALARM_SUB));
     }
 
-    public static void whiteListMatters(final Activity a, String reason){
-        IntentWrapper.whiteListMatters(a, reason);
+    /**
+     * 后台允许白名单
+     * @param a
+     * @param reason
+     * @param doAll  将所有影响保活开关都打开
+     */
+    public static void whiteListMatters(final Activity a, String reason,boolean doAll){
+        try{
+            IntentWrapper.whiteListMatters(a, reason);
+            if(doAll){
+                openPushSwitch(a,reason);
+                checkWindowPerission(a,reason);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * 打开通知权限
+     * @param context
+     * @param reason
+     */
+    public static void openPushSwitch(final Context context, String reason){
+        new AlertDialog.Builder(context)
+                .setCancelable(false)
+                .setTitle("需要开启 " + getApplicationName(context) + " 的通知开关")
+                .setMessage(reason + "需要 " + getApplicationName(context) + " 开启通知管理开关。\n\n" +
+                        "请点击『确定』，在弹出的『通知管理』页面打开允许通知选项。")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface d, int w) {
+                        NotificationSetUtil.OpenNotificationSetting(context, null);
+                    }
+                })
+                .show();
+    }
+
+    /**
+     * 检测悬浮窗权限
+     * 兼容6.0及以下
+     */
+    public static void checkWindowPerission(final Context context, String reason) {
+        if(!SpManager.getInstance().getBoolean(SpManager.Keys.IS_HINT_SYSTEM_WINDOW)){
+            new AlertDialog.Builder(context)
+                    .setCancelable(false)
+                    .setTitle("需要开启 " + getApplicationName(context) + " 的悬浮窗权限")
+                    .setMessage(reason + "需要 " + getApplicationName(context) + " 开启悬浮窗开关。\n\n" +
+                            "请点击『确定』，在弹出的『悬浮窗』页面打开允许在其他应用上层显示开关。")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface d, int w) {
+                            SpManager.getInstance().putBoolean(SpManager.Keys.IS_HINT_SYSTEM_WINDOW,true);
+                            JumpWindowPemiManagement.goToWindow(context);
+                        }
+                    })
+                    .show();
+        }else {
+            windowPermissionPassWithCheck(context,reason);
+        }
+    }
+
+    private static void windowPermissionPassWithCheck(final Context context, String reason) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !JumpWindowPemiManagement.hasWindowPei(context)) {
+            new AlertDialog.Builder(context)
+                    .setCancelable(false)
+                    .setTitle("需要开启 " + getApplicationName(context) + " 的悬浮窗权限")
+                    .setMessage(reason + "需要 " + getApplicationName(context) + " 开启悬浮窗开关。\n\n" +
+                            "请点击『确定』，在弹出的『悬浮窗』页面打开允许在其他应用上层显示开关。")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.M)
+                        @Override
+                        public void onClick(DialogInterface d, int w) {
+                            SpManager.getInstance().putBoolean(SpManager.Keys.IS_HINT_SYSTEM_WINDOW,true);
+                            JumpWindowPemiManagement.goToWindow(context);
+                            Intent intent =new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.getPackageName()));
+                            context.startActivity(intent);
+                        }
+                    })
+                    .show();
+            }
+    }
 }

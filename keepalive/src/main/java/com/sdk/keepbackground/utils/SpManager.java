@@ -57,6 +57,8 @@ public class SpManager extends SPUtils {
 
 		//是否已执行过白名单操作
 		public static final String  SP_IS_ACTION_WHITE_POWER = "isDoPowerWhite";
+		//是否开启过悬浮窗权限
+		public static final String  IS_HINT_SYSTEM_WINDOW = "isDoWindowWhite";
 
 	}
 

@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+
     <!--<uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS"/>-->
 
     <application
@@ -25,7 +27,6 @@
             android:name="com.sdk.keepbackground.watch.WakeUpReceiver"
             android:process=":watch">
             <intent-filter>
-                <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.intent.action.USER_PRESENT" />

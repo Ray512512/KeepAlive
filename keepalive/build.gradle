@@ -3,22 +3,22 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='shihoo.wang'
 
 //aar名字
-def SDK_NAME = "keepalive-1.0.5.aar"
+def SDK_NAME = "keepalive-1.1.0.aar"
 
 //去除多余类配置
 configurations.maybeCreate("exclude")
 artifacts.add("exclude", file(SDK_NAME))
 //先生成aar后再加上去除配置
-apply from: "${project.projectDir.absoluteFile}\\excludeAar.gradle"
+//apply from: "${project.projectDir.absoluteFile}\\excludeAar.gradle"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 26
     buildToolsVersion "29.0.1"
 
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 29
+        targetSdkVersion 26
         versionCode 2
         versionName "1.1"
 
@@ -53,6 +53,8 @@ ext.rxAndroidVersion = '2.0.1'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
+    api 'com.android.support:appcompat-v7:26.1.0'
+
 //    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
 //    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
 }

@@ -1,4 +1,4 @@
-package com.sdk.keepbackground.utils;
+package com.sdk.keepbackground.work;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,6 +14,8 @@ import android.os.Build;
 import android.os.PowerManager;
 import android.provider.Settings;
 
+
+import com.sdk.keepbackground.utils.SpManager;
 
 import java.util.ArrayList;
 import java.util.List;
