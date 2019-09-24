@@ -86,12 +86,14 @@ public class WatchDogService extends Service {
                 scheduler.schedule(builder.build());
             } else {
                 //Android 4.4- 使用 AlarmManager
-                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                Intent i = new Intent(WatchDogService.this, WatchProcessPrefHelper.mWorkServiceClass);
-                mPendingIntent = PendingIntent.getService(WatchDogService.this, HASH_CODE, i, PendingIntent.FLAG_UPDATE_CURRENT);
-                am.setRepeating(AlarmManager.RTC_WAKEUP,
-                        System.currentTimeMillis() + DaemonEnv.getWakeUpInterval(DaemonEnv.MINIMAL_WAKE_UP_INTERVAL),
-                        DaemonEnv.getWakeUpInterval(DaemonEnv.MINIMAL_WAKE_UP_INTERVAL), mPendingIntent);
+                if(WatchProcessPrefHelper.mWorkServiceClass!=null) {
+                    AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    Intent i = new Intent(WatchDogService.this, WatchProcessPrefHelper.mWorkServiceClass);
+                    mPendingIntent = PendingIntent.getService(WatchDogService.this, HASH_CODE, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                    am.setRepeating(AlarmManager.RTC_WAKEUP,
+                            System.currentTimeMillis() + DaemonEnv.getWakeUpInterval(DaemonEnv.MINIMAL_WAKE_UP_INTERVAL),
+                            DaemonEnv.getWakeUpInterval(DaemonEnv.MINIMAL_WAKE_UP_INTERVAL), mPendingIntent);
+                }
             }
             //使用定时 Observable，避免 Android 定制系统 JobScheduler / AlarmManager 唤醒间隔不稳定的情况
            /* mDisposable = Observable

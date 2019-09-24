@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         DaemonEnv.init(this);
         //請求用戶忽略电池优化
         String reason="轨迹跟踪服务的持续运行";
-        DaemonEnv.whiteListMatters(this, reason,true);
+        DaemonEnv.whiteListMatters(this, reason);
         //启动work服务
-        DaemonEnv.startServiceSafelyWithData(MainActivity.this,AbsWorkService.class);
+        DaemonEnv.startServiceSafelyWithData(MainActivity.this,MyService.class);
     }
 
     //防止华为机型未加入白名单时按返回键回到桌面再锁屏后几秒钟进程被杀

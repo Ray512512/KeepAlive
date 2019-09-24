@@ -126,6 +126,18 @@ public final class DaemonEnv {
      * 后台允许白名单
      * @param a
      * @param reason
+     */
+    public static void whiteListMatters(final Activity a, String reason){
+        try{
+            IntentWrapper.whiteListMatters(a, reason);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    /**
+     * 后台允许白名单
+     * @param a
+     * @param reason
      * @param doAll  将所有影响保活开关都打开
      */
     public static void whiteListMatters(final Activity a, String reason,boolean doAll){

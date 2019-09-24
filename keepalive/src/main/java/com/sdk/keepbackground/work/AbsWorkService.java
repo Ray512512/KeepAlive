@@ -15,7 +15,7 @@ import com.sdk.keepbackground.watch.AbsServiceConnection;
 import com.sdk.keepbackground.utils.ForegroundNotificationUtils;
 import com.sdk.keepbackground.singlepixel.ScreenReceiverUtil;
 import com.sdk.keepbackground.watch.WatchDogService;
-
+import com.sdk.keepbackground.watch.WatchProcessPrefHelper;
 
 
 /**
@@ -42,6 +42,8 @@ public abstract class AbsWorkService extends Service {
     public void onCreate() {
         super.onCreate();
         if(DaemonEnv.app==null)return;
+        Log.d("sj_keep", this.getClass()+"  onCreate 启动。。。。");
+        WatchProcessPrefHelper.mWorkServiceClass=this.getClass();
         if (!needStartWorkService()) {
             stopSelf();
         }else {
@@ -118,7 +120,7 @@ public abstract class AbsWorkService extends Service {
 
     /**
      * 是否 任务完成, 不再需要服务运行?
-     * @return 应当停止服务, true; 应当启动服务, false; 无法判断, 什么也不做, null.
+     * @return true 应当启动服务; false 应当停止服务; null 无法判断, 什么也不做.
      */
     public abstract Boolean needStartWorkService();
 
