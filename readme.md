@@ -39,7 +39,7 @@ DaemonEnv.whiteListMatters(this, "保活服务的持续运行");
 集成该类需要重写几个抽象方法：
    /**
      * 是否 任务完成, 不再需要服务运行?
-     * @return 应当停止服务, true; 应当启动服务, false; 无法判断, 什么也不做, null.
+     @return true 应当启动服务; false 应当停止服务; null 无法判断, 什么也不做.
      */
  @Override
     public Boolean needStartWorkService() {
