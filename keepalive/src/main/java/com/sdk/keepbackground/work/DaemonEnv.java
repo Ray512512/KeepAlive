@@ -1,5 +1,6 @@
 package com.sdk.keepbackground.work;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
@@ -10,15 +11,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 
 import com.sdk.keepbackground.utils.JumpWindowPemiManagement;
 import com.sdk.keepbackground.utils.NotificationSetUtil;
-import com.sdk.keepbackground.utils.SPUtils;
 import com.sdk.keepbackground.utils.SpManager;
 import com.sdk.keepbackground.watch.AbsServiceConnection;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static com.sdk.keepbackground.work.IntentWrapper.getApplicationName;
 
 
@@ -129,6 +132,11 @@ public final class DaemonEnv {
      */
     public static void whiteListMatters(final Activity a, String reason){
         try{
+            if (ContextCompat.checkSelfPermission(a, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {//判断是否已经赋予权限
+                ActivityCompat.requestPermissions(a,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            }
             IntentWrapper.whiteListMatters(a, reason);
         }catch (Exception e){
             e.printStackTrace();

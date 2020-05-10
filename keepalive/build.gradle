@@ -3,13 +3,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='shihoo.wang'
 
 //aar名字
-def SDK_NAME = "keepalive-1.1.3.aar"
+def SDK_NAME = "keepalive-1.1.5.aar"
 
 //去除多余类配置
 configurations.maybeCreate("exclude")
 artifacts.add("exclude", file(SDK_NAME))
 //先生成aar后再加上去除配置
-//apply from: "${project.projectDir.absoluteFile}\\excludeAar.gradle"
+apply from: "${project.projectDir.absoluteFile}\\excludeAar.gradle"
 
 android {
     compileSdkVersion 26

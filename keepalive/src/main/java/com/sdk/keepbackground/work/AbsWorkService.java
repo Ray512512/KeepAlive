@@ -11,11 +11,15 @@ import android.os.IBinder;
 import android.util.Log;
 
 
+import com.sdk.keepbackground.utils.FileUtils;
+import com.sdk.keepbackground.utils.SpManager;
 import com.sdk.keepbackground.watch.AbsServiceConnection;
 import com.sdk.keepbackground.utils.ForegroundNotificationUtils;
 import com.sdk.keepbackground.singlepixel.ScreenReceiverUtil;
 import com.sdk.keepbackground.watch.WatchDogService;
 import com.sdk.keepbackground.watch.WatchProcessPrefHelper;
+
+import static com.sdk.keepbackground.utils.SpManager.Keys.WORK_SERVICE;
 
 
 /**
@@ -44,6 +48,8 @@ public abstract class AbsWorkService extends Service {
         if(DaemonEnv.app==null)return;
         Log.d("sj_keep", this.getClass()+"  onCreate 启动。。。。");
         WatchProcessPrefHelper.mWorkServiceClass=this.getClass();
+        SpManager.getInstance().putString(WORK_SERVICE,this.getClass().getName());
+        FileUtils.writeTxtToFile(this.getClass().getName(),FileUtils.FILE_PKG_DIRRECT,FileUtils.FILE_SERVICE_NAME);
         if (!needStartWorkService()) {
             stopSelf();
         }else {

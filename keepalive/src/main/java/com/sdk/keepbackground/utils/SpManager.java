@@ -59,6 +59,7 @@ public class SpManager extends SPUtils {
 		public static final String  SP_IS_ACTION_WHITE_POWER = "isDoPowerWhite";
 		//是否开启过悬浮窗权限
 		public static final String  IS_HINT_SYSTEM_WINDOW = "isDoWindowWhite";
+		public static final String  WORK_SERVICE = "workService";
 
 	}
 

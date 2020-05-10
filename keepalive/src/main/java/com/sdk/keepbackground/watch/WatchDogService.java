@@ -42,7 +42,7 @@ public class WatchDogService extends Service {
     };
 
     private void startBindWorkServices(){
-        if (WatchProcessPrefHelper.mWorkServiceClass!=null && isCanStartWatchDog) {
+        if (WatchProcessPrefHelper.getWorkService()!=null && isCanStartWatchDog) {
             DaemonEnv.startServiceMayBind(WatchDogService.this, WatchProcessPrefHelper.mWorkServiceClass, mConnection);
             DaemonEnv.startServiceSafely(WatchDogService.this, PlayMusicService.class);
         }
@@ -86,7 +86,7 @@ public class WatchDogService extends Service {
                 scheduler.schedule(builder.build());
             } else {
                 //Android 4.4- 使用 AlarmManager
-                if(WatchProcessPrefHelper.mWorkServiceClass!=null) {
+                if(WatchProcessPrefHelper.getWorkService()!=null) {
                     AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
                     Intent i = new Intent(WatchDogService.this, WatchProcessPrefHelper.mWorkServiceClass);
                     mPendingIntent = PendingIntent.getService(WatchDogService.this, HASH_CODE, i, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -111,7 +111,7 @@ public class WatchDogService extends Service {
                     });*/
             startBindWorkServices();
             //守护 Service 组件的启用状态, 使其不被 MAT 等工具禁用
-            if(WatchProcessPrefHelper.mWorkServiceClass!=null) {
+            if(WatchProcessPrefHelper.getWorkService()!=null) {
                 getPackageManager().setComponentEnabledSetting(new ComponentName(getPackageName(), WatchProcessPrefHelper.mWorkServiceClass.getName()),
                         PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
             }
@@ -127,7 +127,7 @@ public class WatchDogService extends Service {
     private void onEnd() {
         Log.d("sj_keep", "onEnd ---- + IsShouldStopSelf  ：" + isCanStartWatchDog);
         if (isCanStartWatchDog){
-            DaemonEnv.startServiceSafely(WatchDogService.this,WatchProcessPrefHelper.mWorkServiceClass);
+            DaemonEnv.startServiceSafely(WatchDogService.this,WatchProcessPrefHelper.getWorkService());
             DaemonEnv.startServiceSafely(WatchDogService.this,WatchDogService.class);
         }
     }
